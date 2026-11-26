@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Excel-DNA 加载项。net48：Win10/11 自带运行时，Excel 与 WPS 都无需额外安装 .NET -->
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace>YTools.AddIn</RootNamespace>
+    <AssemblyName>YTools.AddIn</AssemblyName>
+    <ExcelAddInName>工具宏</ExcelAddInName>
+    <ExcelAddInFileName>YTools</ExcelAddInFileName>
+    <!-- 目标环境为 32 位 Excel / WPS；64 位一并产出备用 -->
+    <ExcelDnaCreate32BitAddIn>true</ExcelDnaCreate32BitAddIn>
+    <ExcelDnaCreate64BitAddIn>true</ExcelDnaCreate64BitAddIn>
+    <RunExcelDnaPack>true</RunExcelDnaPack>
+    <!-- 依赖库一并打进 .xll，部署时只需拷一个文件 -->
+    <ExcelAddInInclude>YTools.Core.dll;MathNet.Numerics.dll</ExcelAddInInclude>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="ExcelDna.AddIn" Version="1.9.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YTools.Core\YTools.Core.csproj" />
+  </ItemGroup>
+</Project>

@@ -12,3 +12,8 @@ data/
 
 # graphify 生成产物
 graphify-out/
+
+# .NET
+dotnet/**/bin/
+dotnet/**/obj/
+*.user

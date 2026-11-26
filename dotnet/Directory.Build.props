@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Company>工具宏</Company>
+    <Product>工具宏</Product>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+</Project>
