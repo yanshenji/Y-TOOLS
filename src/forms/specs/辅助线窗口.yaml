@@ -1,0 +1,96 @@
+schemaVersion: 1
+kind: xlflow.userform
+basis: designer
+coordinateSystem: parent-relative
+form:
+    name: 辅助线窗口
+    caption: ""
+    width: 198.73700787401575
+    height: 114.74645669291338
+    observed:
+        width: 207.89999389648438
+        height: 139.64999389648438
+controls:
+    - id: control_001
+      zIndex: 0
+      type: CommandButton
+      name: btnCancel
+      caption: 取消
+      left: 48
+      top: 72
+      width: 54
+      height: 18
+      tabIndex: 0
+      enabled: true
+      visible: true
+      unsupported:
+        - value
+    - id: control_002
+      zIndex: 1
+      type: Label
+      name: Label1
+      caption: 名称
+      left: 36
+      top: 18
+      width: 24
+      height: 12
+      tabIndex: 1
+      enabled: true
+      visible: true
+    - id: control_003
+      zIndex: 2
+      type: Label
+      name: Label2
+      caption: 值
+      left: 36
+      top: 42
+      width: 30
+      height: 12
+      tabIndex: 2
+      enabled: true
+      visible: true
+    - id: control_004
+      zIndex: 3
+      type: TextBox
+      name: txtSeriesName
+      text: 标准
+      value: 标准
+      left: 78
+      top: 12
+      width: 72
+      height: 18
+      tabIndex: 3
+      enabled: true
+      visible: true
+    - id: control_005
+      zIndex: 4
+      type: TextBox
+      name: txtYValue
+      left: 78
+      top: 36
+      width: 72
+      height: 18
+      tabIndex: 4
+      enabled: true
+      visible: true
+    - id: control_006
+      zIndex: 5
+      type: CommandButton
+      name: btnOK
+      caption: 确定
+      left: 108
+      top: 72
+      width: 54
+      height: 18
+      tabIndex: 5
+      enabled: true
+      visible: true
+      unsupported:
+        - value
+warnings:
+    - code: unsupported_properties
+      message: 'Unsupported Designer properties were omitted from the FormSpec snapshot: value.'
+      control: btnCancel
+    - code: unsupported_properties
+      message: 'Unsupported Designer properties were omitted from the FormSpec snapshot: value.'
+      control: btnOK

@@ -1,0 +1,117 @@
+schemaVersion: 1
+kind: xlflow.userform
+basis: designer
+coordinateSystem: parent-relative
+form:
+    name: 产品质量证明书
+    caption: ""
+    width: 236.23937007874017
+    height: 176.9952755905512
+    observed:
+        width: 245.35000610351562
+        height: 201.60000610351562
+controls:
+    - id: control_001
+      zIndex: 0
+      type: Label
+      name: 批号
+      caption: 批  号
+      left: 42
+      top: 30
+      width: 36
+      height: 12
+      tabIndex: 0
+      enabled: true
+      visible: true
+    - id: control_002
+      zIndex: 1
+      type: Label
+      name: Label1
+      caption: 金属量
+      left: 42
+      top: 60
+      width: 36
+      height: 12
+      tabIndex: 1
+      enabled: true
+      visible: true
+    - id: control_003
+      zIndex: 2
+      type: TextBox
+      name: BatchNumberTextBox
+      left: 84
+      top: 24
+      width: 114
+      height: 24
+      tabIndex: 2
+      enabled: true
+      visible: true
+    - id: control_004
+      zIndex: 3
+      type: TextBox
+      name: MetalQuantityTextBox
+      left: 84
+      top: 54
+      width: 114
+      height: 24
+      tabIndex: 3
+      enabled: true
+      visible: true
+    - id: control_005
+      zIndex: 4
+      type: CommandButton
+      name: OKButton
+      caption: 确定
+      left: 138
+      top: 126
+      width: 60
+      height: 18
+      tabIndex: 4
+      enabled: true
+      visible: true
+      unsupported:
+        - value
+    - id: control_006
+      zIndex: 5
+      type: CommandButton
+      name: CancelButton
+      caption: 取消
+      left: 72
+      top: 126
+      width: 60
+      height: 18
+      tabIndex: 5
+      enabled: true
+      visible: true
+      unsupported:
+        - value
+    - id: control_007
+      zIndex: 6
+      type: Label
+      name: Label2
+      caption: 单位重量
+      left: 36
+      top: 90
+      width: 42
+      height: 12
+      tabIndex: 6
+      enabled: true
+      visible: true
+    - id: control_008
+      zIndex: 7
+      type: ComboBox
+      name: PackageWeightComboBox
+      left: 84
+      top: 84
+      width: 114
+      height: 24
+      tabIndex: 7
+      enabled: true
+      visible: true
+warnings:
+    - code: unsupported_properties
+      message: 'Unsupported Designer properties were omitted from the FormSpec snapshot: value.'
+      control: OKButton
+    - code: unsupported_properties
+      message: 'Unsupported Designer properties were omitted from the FormSpec snapshot: value.'
+      control: CancelButton

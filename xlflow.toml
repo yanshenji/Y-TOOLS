@@ -1,0 +1,239 @@
+# Project identity and entry point.
+[project]
+# Project name used in output messages. Falls back to the workbook base name.
+name = "工具宏"
+# Default macro invoked by xlflow run when no positional macro is given.
+entry = "Main.Run"
+
+# Excel automation settings.
+[excel]
+# Path to the workbook, relative to the project root or absolute.
+path = "build/工具宏.xlam"
+# Make the Excel application window visible during automation.
+visible = false
+# Suppress Excel alert dialogs (e.g. overwrite confirmations).
+display_alerts = false
+# Excel bridge mode. Valid values: "auto", "dotnet".
+bridge = "auto"
+
+# Source tree directories.
+[src]
+# Directory for standard .bas modules.
+modules = "src/modules"
+# Directory for class .cls modules.
+classes = "src/classes"
+# Directory for UserForm .frm files.
+forms = "src/forms"
+# Directory for workbook document module text.
+workbook = "src/workbook"
+
+# VBE component folder support (Rubberduck-style).
+[vba]
+# Enable @Folder("A.B") annotations and nested source paths.
+folders = true
+# How xlflow handles @Folder annotations during push.
+# Valid values: "update", "preserve", "ignore".
+#   "update"    – rewrite from source directory layout.
+#   "preserve"  – keep existing annotations as-is.
+#   "ignore"    – disable folder annotation read/write.
+folder_annotation = "update"
+# Automatically assign default folder annotations based on source paths.
+default_component_folders = true
+
+# Optional Erl instrumentation. When enabled, push numbers only temporary
+# import copies; tracked source remains unnumbered.
+# [vba.line_numbers]
+# enabled = true
+
+# UserForm source mode.
+[userform]
+# Where UserForm code-behind lives in the source tree.
+# Valid values: "frm", "sidecar".
+#   "frm"     – code is kept inside the exported .frm file.
+#   "sidecar" – code is split into src/forms/code/<FormName>.bas.
+code_source = "sidecar"
+
+# Release build source filtering. This affects `build` only; `push` and `pack`
+# always use the complete source tree.
+[build]
+# Project-root-relative doublestar globs excluded from `xlflow build`.
+exclude = [
+  "src/modules/Tests/**",
+  "src/modules/Xlflow/XlflowAssert.bas",
+]
+
+# UserForm topology authority for template-backed `xlflow pack`.
+# Valid values: "template", "source". Blank mode is always source-authoritative.
+[pack]
+userform_topology = "template"
+
+# VBA project text encoding for `xlflow pack --blank`.
+[pack.blank]
+code_page = 936
+
+# Procedure complexity metrics.
+[metrics]
+# Project-root-relative doublestar globs excluded from metric collection.
+exclude = []
+
+# A value of zero disables that threshold; positive values are strict upper bounds.
+[metrics.thresholds]
+cyclomatic_complexity = 0
+max_nesting_depth = 0
+statement_count = 0
+source_line_count = 0
+branch_count = 0
+loop_count = 0
+goto_count = 0
+exit_point_count = 0
+parameter_count = 0
+byref_parameter_count = 0
+local_variable_count = 0
+call_fan_out = 0
+
+# Optional hotspot ranking. A zero top-N or score threshold disables it.
+[metrics.hotspots]
+procedure_top_n = 0
+module_top_n = 0
+procedure_score_threshold = 0
+module_score_threshold = 0
+
+# Automatic backup retention is disabled by default. Uncomment to prune old
+# metadata-backed backups for the configured workbook after successful backup-
+# producing push and rollback operations.
+# [backup.retention]
+# enabled = false
+# max_count = 20
+# max_age_days = 30
+# min_keep = 5
+# max_total_size_mb = 2048
+
+# VBA formatter settings.
+[fmt]
+# Normalize spacing around safe binary operators in xlflow fmt.
+operator_spacing = true
+# Normalize spacing in safe VBA declarations in xlflow fmt.
+declaration_spacing = true
+# Normalize VBA keyword casing in xlflow fmt.
+keyword_casing = true
+# Normalize known VBA/Excel/Office built-in identifier casing in xlflow fmt.
+builtin_casing = true
+
+# Source-preflight diagnostic waivers.
+[preflight]
+# Diagnostics remain enabled and visible when allowed here; only their
+# source-preflight blocking effect is waived. Excel/VBE compilation may still fail.
+allowed_diagnostics = [
+  "VB008",
+]
+
+
+# Static analysis rules.
+[lint]
+# Disable specific lint rules by diagnostic ID.
+#
+# Example:
+# disabled_rules = [
+#   "VB006", # Allow public module-level fields in this legacy project.
+# ]
+disabled_rules = []
+
+# VB020 unused-local-variable warnings are enabled by default.
+# Add "VB020" to disabled_rules if a project intentionally keeps scratch locals.
+#
+# Optional project-wide lint rules. They are disabled by default because
+# they can be noisy in projects with callback-heavy or workbook-driven VBA.
+# Uncomment individual rules to enable them.
+# detect_scope_shadowing = true # VB018
+# detect_unused_private_procedures = true # VB021
+# detect_nested_with_ambiguity = true # VB027
+# detect_empty_if = true # VB067
+# detect_empty_else = true # VB068
+# detect_empty_case = true # VB069
+# detect_empty_for = true # VB070
+# detect_empty_for_each = true # VB071
+# detect_empty_do = true # VB072
+# detect_empty_while = true # VB073
+# detect_empty_procedure = true # VB074
+# detect_empty_module = true # VB075
+# detect_legacy_call = true # VB076
+# detect_rem_comment = true # VB077
+# detect_error_statement = true # VB078
+# detect_global_declaration = true # VB079
+# detect_let_assignment = true # VB080
+# detect_identifier_type_suffix = true # VB081
+# detect_while_wend = true # VB082
+# detect_def_type = true # VB083
+# detect_redundant_step_one = true # VB084
+# require_explicit_step = true # VB085
+# detect_redundant_option_base_zero = true # VB086
+# detect_module_dim = true # VB087
+# detect_implicit_public = true # VB088
+# detect_multiple_declarations = true # VB089
+# detect_unused_labels = true # VB090
+# detect_stop_statement = true # VB091
+# detect_on_local_error = true # VB092
+
+# Note: VB084 (detect_redundant_step_one) and VB085 (require_explicit_step)
+# express opposite policies for For Step clauses; enable at most one.
+
+# Optional local procedure-name constant check (VB044).
+# [lint.procedure_name_constant]
+# enabled = true
+# constant_name = "PROCEDURE_NAME"
+
+
+# Runtime-risk analysis rules.
+[analyze]
+# Disable specific analyzer rules by diagnostic ID.
+#
+# Example:
+# disabled_rules = [
+#   "VBA205", # Allow active worksheet dependencies in this legacy project.
+# ]
+disabled_rules = []
+
+# Plain HTTP origins explicitly allowed for development use.
+development_http_origins = []
+
+# Optional dataflow-sensitive analyzer rules are disabled by default.
+# Uncomment the following setting to check Function and Property Get return paths.
+# detect_function_return_path = true # VBA210
+
+# Other optional analyzer rules (commented suggestions; also see the diagnostic catalog):
+# detect_dictionary_collection_guard = true # VBA207
+# detect_dictionary_iteration_value_usage = true # VBA213
+# detect_risky_module_state = true # VBA240
+# detect_expensive_full_range_operations = true # VBA242
+# detect_value2_performance_opportunities = true # VBA243
+# detect_opaque_boolean_arguments = true # VBA248
+# detect_implicit_default_member_access = true # VBA253
+# detect_unbound_default_member_access = true # VBA254
+# detect_bang_notation = true # VBA255
+# detect_dead_stores = true # VBA256
+# detect_discarded_function_return = true # VBA257
+# detect_function_return_always_discarded = true # VBA258
+# detect_unreachable_select_case = true # VBA259
+# detect_worksheet_string_access = true # VBA260
+# detect_application_worksheet_function_dispatch = true # VBA261
+# detect_host_bracket_expressions = true # VBA262
+# detect_unused_parameters = true # VBA265
+# detect_unused_private_constants = true # VBA266
+# detect_unused_udt_members = true # VBA267
+# detect_never_assigned_variables = true # VBA268
+# detect_unassigned_variable_usage = true # VBA269
+# detect_udf_cell_reference_names = true # VBA270
+# detect_option_base_paramarray_inconsistency = true # VBA271
+# detect_option_base_array_inconsistency = true # VBA272
+# detect_implicit_byref_parameters = true # VBA273
+# detect_assigned_byval_parameters = true # VBA274
+# detect_byref_parameters_can_be_byval = true # VBA275
+# detect_redundant_byref_modifiers = true # VBA277
+# detect_public_member_underscore_names = true # VBA278
+# detect_document_module_public_enum = true # VBA279
+# detect_write_only_property = true # VBA280
+# detect_public_interface_event_members = true # VBA281
+# detect_predeclared_instance_access = true # VBA282
+# Note: detect_implicit_byref_parameters (VBA273) and
+# detect_redundant_byref_modifiers (VBA277) express opposite ByRef style
+# policies; enabling both fails configuration validation.
