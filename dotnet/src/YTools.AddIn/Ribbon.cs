@@ -88,6 +88,16 @@ namespace YTools.AddIn
           </menu>
           <button id='yt_b_a_mk' label='MK 趋势检验' imageMso='ChartTrendlineMenu' tag='工具宏_MK趋势检验' onAction='OnCommand' />
         </group>
+        <group id='yt_g_chart' label='图表'>
+          <button id='yt_b_c_line' label='标记折线图' size='large' imageMso='ChartTypeLineInsertGallery' tag='工具宏_画折线图' onAction='OnCommand' screentip='选中一列或多列（可不连续），在新工作表中每列画一张折线图' />
+          <button id='yt_b_c_inplace' label='画在原表' imageMso='ChartInsert' tag='工具宏_画折线图原表' onAction='OnCommand' screentip='在选中单元格右下方直接画图' />
+          <button id='yt_b_c_ctrl' label='控制图' imageMso='ChartTypeLineInsertGallery' tag='工具宏_画控制图' onAction='OnCommand' screentip='单值-移动极差（I-MR）控制图，超限点标红' />
+          <button id='yt_b_c_helper' label='添加辅助线' imageMso='ChartLines' tag='工具宏_添加辅助线' onAction='OnCommand' screentip='先选中图表，再添加一条水平辅助线' />
+          <menu id='yt_m_chart' label='更多' imageMso='ChartInsert'>
+            <button id='yt_b_c_co' label='钴杂比折线图（选中杂质列）' tag='工具宏_画钴杂比' onAction='OnCommand' />
+            <button id='yt_b_c_rule' label='按「配置表」批量出图' tag='工具宏_按配置表出图' onAction='OnCommand' />
+          </menu>
+        </group>
         <group id='yt_g_product' label='产品'>
           <button id='yt_b_p_coa' label='质量证明书' size='large' imageMso='FileSaveAsPdfOrXps' tag='工具宏_生成质量证明书' onAction='OnCommand' screentip='按批号从检测台账取数，生成 Excel 与 PDF 证书' />
         </group>
