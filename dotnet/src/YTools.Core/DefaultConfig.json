@@ -171,5 +171,60 @@
       "readOnly": false
     }
   ],
-  "batchFolder": "C:\\质量证书\\碳酸钴\\"
+  "batchFolder": "C:\\质量证书\\碳酸钴\\",
+  "certificate": {
+    "templateFolder": "\\\\10.34.100.50\\质量部\\赣州寒锐检测数据（每日更新）\\产品\\产品质量证明书\\产品质量证明书模板\\",
+    "outputFolder": "\\\\10.34.100.50\\质量部\\赣州寒锐检测数据（每日更新）\\产品\\产品质量证明书\\",
+    "ledgerGroup": "成品数据",
+    "products": [
+      {
+        "prefix": "LHG",
+        "type": "氯化钴",
+        "metalContent": 0.242,
+        "packageWeight": 1000,
+        "template": "氯化钴产品质量证明书模板.xlsx",
+        "sheetName": "氯化钴"
+      },
+      {
+        "prefix": "TSG",
+        "type": "碳酸钴",
+        "metalContent": 0.465,
+        "packageWeight": 500,
+        "template": "碳酸钴产品质量证明书模板.xlsx",
+        "sheetName": "碳酸钴"
+      },
+      {
+        "prefix": "YHG",
+        "type": "氧化钴",
+        "metalContent": 0.715,
+        "packageWeight": 500,
+        "template": "氧化钴产品质量证明书模板.xlsx",
+        "sheetName": "氧化钴"
+      },
+      {
+        "prefix": "ALLOY",
+        "type": "2108电钴",
+        "metalContent": 1,
+        "packageWeight": 1000,
+        "template": "2108电钴钴产品质量证明书模板.xlsx",
+        "sheetName": "（2108）电钴检测记录表 "
+      },
+      {
+        "prefix": "STANDARD",
+        "type": "109电钴",
+        "metalContent": 1,
+        "packageWeight": 1000,
+        "template": "109电钴产品质量证明书模板.xlsx",
+        "sheetName": "（109）电钴检测记录表"
+      },
+      {
+        "prefix": "HR06A0",
+        "type": "四钴",
+        "metalContent": 0.725,
+        "packageWeight": 1000,
+        "template": "四钴产品质量证明书模板.xlsx",
+        "sheetName": "四氧化三钴"
+      }
+    ]
+  }
 }

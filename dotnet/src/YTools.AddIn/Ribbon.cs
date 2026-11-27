@@ -73,10 +73,23 @@ namespace YTools.AddIn
           <button id='yt_b_d_join' label='连接并复制' imageMso='Copy' tag='工具宏_连接可见单元格' onAction='OnCommand' screentip='用“、”连接可见单元格，复制到剪贴板' />
           <button id='yt_b_d_chem' label='化学式上下标' imageMso='Subscript' tag='工具宏_化学式上下标' onAction='OnCommand' />
           <button id='yt_b_d_narrow' label='转窄表' imageMso='TableInsert' tag='工具宏_检测数据转窄表' onAction='OnCommand' />
-          <menu id='yt_m_outlier' label='异常值' imageMso='ConditionalFormattingTopBottomRulesMenu'>
-            <button id='yt_b_o_yellow' label='Grubbs 标黄（选区）' tag='工具宏_Grubbs标黄' onAction='OnCommand' />
+        </group>
+        <group id='yt_g_anomaly' label='异常检测'>
+          <button id='yt_b_a_all' label='五法对比' size='large' imageMso='ConditionalFormattingTopBottomRulesMenu' tag='工具宏_异常_五法对比' onAction='OnCommand' screentip='复制可见数据到新工作表，用五种方法分别标记' />
+          <menu id='yt_m_anomaly' label='单项检测' imageMso='ConditionalFormattingHighlightCellsMenu'>
+            <button id='yt_b_a_3s' label='3西格玛' tag='工具宏_异常_3西格玛' onAction='OnCommand' />
+            <button id='yt_b_a_grubbs1' label='Grubbs 单侧(最大/最小)' tag='工具宏_异常_Grubbs单侧' onAction='OnCommand' />
+            <button id='yt_b_a_cusum' label='CUSUM' tag='工具宏_异常_CUSUM' onAction='OnCommand' />
+            <button id='yt_b_a_ewma' label='EWMA' tag='工具宏_异常_EWMA' onAction='OnCommand' />
+            <button id='yt_b_a_box' label='箱线图(IQR)' tag='工具宏_异常_箱线图' onAction='OnCommand' />
+            <menuSeparator id='yt_s_a1' />
+            <button id='yt_b_o_yellow' label='Grubbs 迭代标黄（选区）' tag='工具宏_Grubbs标黄' onAction='OnCommand' />
             <button id='yt_b_o_flag' label='Grubbs 判定 A 列 → B 列' tag='工具宏_Grubbs标注A列' onAction='OnCommand' />
           </menu>
+          <button id='yt_b_a_mk' label='MK 趋势检验' imageMso='ChartTrendlineMenu' tag='工具宏_MK趋势检验' onAction='OnCommand' />
+        </group>
+        <group id='yt_g_product' label='产品'>
+          <button id='yt_b_p_coa' label='质量证明书' size='large' imageMso='FileSaveAsPdfOrXps' tag='工具宏_生成质量证明书' onAction='OnCommand' screentip='按批号从检测台账取数，生成 Excel 与 PDF 证书' />
         </group>
         <group id='yt_g_export' label='导出'>
           <button id='yt_b_e_sheet' label='工作表转 PDF' size='large' imageMso='FileSaveAsPdfOrXps' tag='工具宏_工作表导出PDF' onAction='OnCommand' />
