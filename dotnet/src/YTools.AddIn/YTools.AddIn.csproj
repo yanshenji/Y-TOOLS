@@ -10,8 +10,10 @@
     <ExcelDnaCreate32BitAddIn>true</ExcelDnaCreate32BitAddIn>
     <ExcelDnaCreate64BitAddIn>true</ExcelDnaCreate64BitAddIn>
     <RunExcelDnaPack>true</RunExcelDnaPack>
+    <!-- 只注册带 ExcelFunction/ExcelCommand 特性的方法 -->
+    <ExcelAddInExplicitExports>true</ExcelAddInExplicitExports>
     <!-- 依赖库一并打进 .xll，部署时只需拷一个文件 -->
-    <ExcelAddInInclude>YTools.Core.dll;MathNet.Numerics.dll</ExcelAddInInclude>
+    <ExcelAddInInclude>YTools.Core.dll;MathNet.Numerics.dll;Newtonsoft.Json.dll</ExcelAddInInclude>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="ExcelDna.AddIn" Version="1.9.0" />
@@ -19,6 +21,7 @@
   <ItemGroup>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YTools.Core\YTools.Core.csproj" />

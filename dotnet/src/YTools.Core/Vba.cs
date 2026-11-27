@@ -6,10 +6,16 @@ namespace YTools.Core
     /// <summary>单元格错误值（#VALUE! 等）的占位，由加载项层映射到 Excel 错误。</summary>
     public sealed class CellError
     {
-        public static readonly CellError Value = new CellError("#VALUE!");
+        public static readonly CellError Value = new CellError("#VALUE!", -2146826273);
         public string Text { get; }
-        private CellError(string text) { Text = text; }
+        /// <summary>COM 中错误单元格的值（Range.Value2 里是 Int32，例如 #N/A = -2146826246）。</summary>
+        public int ComCode { get; }
+        private CellError(string text, int comCode) { Text = text; ComCode = comCode; }
         public override string ToString() => Text;
+
+        /// <summary>从 COM 读到的错误码构造，写回时保持原错误类型。</summary>
+        public static CellError FromComCode(int code)
+            => code == Value.ComCode ? Value : new CellError("#ERR" + code, code);
     }
 
     /// <summary>对应 VBA 运行时错误：在 UDF 中表现为 #VALUE!。</summary>
@@ -79,6 +85,8 @@ namespace YTools.Core
                 case string s: return s;
                 case bool b: return b ? "True" : "False";
                 case double x: return x.ToString("G15", CultureInfo.InvariantCulture);
+                case DateTime dt: return dt.ToString(dt.TimeOfDay == TimeSpan.Zero ? "yyyy/M/d" : "yyyy/M/d H:mm:ss", CultureInfo.InvariantCulture);
+                case decimal m: return m.ToString(CultureInfo.InvariantCulture);
                 default: throw new VbaRuntimeException("类型不匹配");
             }
         }
