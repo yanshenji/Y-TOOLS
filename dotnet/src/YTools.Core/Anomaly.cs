@@ -74,7 +74,10 @@ namespace YTools.Core
         }
 
         /// <summary>
-        /// Grubbs 单侧（最大/最小）：|x-均值|/S 超过临界值标黄，临界值 t 取 T.INV.2T(α, n-2)（与原 VBA 一致）。
+        /// Grubbs 单侧（最大/最小）：(x-均值)/S 或 (均值-x)/S 超过单侧临界值即标黄。
+        /// 临界值 G = (n-1)/√n · √(t²/(n-2+t²))，t 为 t 分布上侧 α/n 分位数，即 T.INV.2T(2α/n, n-2)。
+        /// 原 VBA 用的是 T.INV.2T(α, n-2)，漏除 n，临界值偏低（n=10 时 1.80，标准为 2.18），
+        /// 正常数据也会有约 5~7% 的点被标出；2026-11-27 按标准做法修正。
         /// </summary>
         public static ColumnResult GrubbsOneSided(IList<object> cells, double alpha = 0.05)
         {
@@ -83,7 +86,7 @@ namespace YTools.Core
             if (n < 3) return new ColumnResult { Skipped = true, Info = "样本n<3，跳过" };
             double mean = Stats.Average(nums), sd = Stats.StDevS(nums);
             if (sd < 1e-12) return new ColumnResult { Skipped = true, Info = "全部数值相同，跳过" };
-            double t = Stats.TInv2T(alpha, n - 2);
+            double t = Stats.TInv2T(2 * alpha / n, n - 2);
             double crit = (n - 1) / Math.Sqrt(n) * Math.Sqrt(t * t / ((n - 2) + t * t));
             var marks = cells.Select(c =>
             {

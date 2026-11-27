@@ -46,12 +46,20 @@ public class AnomalyTests
     {
         var c = Cells("h", 2.1, 2.3, 2.2, 2.4, 2.2, 2.3, 2.1, 2.2, 2.3, 5.0);
         var r = Anomaly.GrubbsOneSided(c);
-        Assert.Contains("单侧Gcrit=1.7984", r.Info); // T.INV.2T(0.05,8)=2.306 → 1.7984
+        Assert.Contains("单侧Gcrit=2.1761", r.Info); // 标准单侧临界值表 n=10、α=0.05：2.176（原 VBA 为 1.7984）
         Assert.Equal(CellMark.Flag, r.Marks[10]);
         Assert.Equal(CellMark.Clear, r.Marks[0]);
     }
 
     // 前 20 点稳定在 10 附近，之后漂移到 11（参考值由独立的 Python 实现算出）
+    [Fact]
+    public void Grubbs单侧_正常数据不再误标()
+    {
+        // 原 VBA 临界值约 1.8，这组数据里 10.3 的 G≈1.81 会被误标；按标准临界值（约 2.18）不应标出
+        var c = Cells(10.0, 10.2, 9.9, 10.1, 10.0, 9.8, 10.3, 10.1, 10.0, 9.9);
+        Assert.Equal(0, Anomaly.GrubbsOneSided(c).Flagged);
+    }
+
     private static readonly object[] Shift = { 10, 10.2, 9.9, 10.1, 10, 9.8, 10.3, 10.1, 10, 9.9, 10.2, 10, 10.1, 9.9, 10, 10.2, 9.8, 10.1, 10, 10.1, 10.8, 10.9, 11, 10.8, 10.9, 11.1 };
     private static object[] ShiftCells() => Shift.Select(v => (object)Convert.ToDouble(v)).ToArray();
 
