@@ -122,6 +122,17 @@ public class CertificateTests
         Assert.Equal("COA - TSG1 - 2 包 - 1000kg", CertificateMath.FileName("TSG1", count, net));
     }
 
+    [Theory]
+    [InlineData(2.0, true, 2)]
+    [InlineData(1.9999999999, true, 2)]   // 浮点误差
+    [InlineData(3.2258064516129, false, 4)]
+    [InlineData(0.4, false, 1)]
+    public void 包数取整(double count, bool whole, int expected)
+    {
+        Assert.Equal(whole, CertificateMath.TryWholePackages(count, out int n));
+        Assert.Equal(expected, n);
+    }
+
     [Fact]
     public void 模板路径与工作表名()
     {

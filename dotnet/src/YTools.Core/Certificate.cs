@@ -53,6 +53,18 @@ namespace YTools.Core
             return (net, net / packageWeight, packageWeight);
         }
 
+        /// <summary>
+        /// 包数取整：与最近整数相差不到 0.001（浮点误差）时视为整数，返回 true；
+        /// 否则返回 false，rounded 为向上取整（最后一包不满）。
+        /// </summary>
+        public static bool TryWholePackages(double packageCount, out int rounded)
+        {
+            double nearest = Math.Round(packageCount);
+            if (Math.Abs(packageCount - nearest) < 1e-3) { rounded = (int)nearest; return true; }
+            rounded = (int)Math.Ceiling(packageCount);
+            return false;
+        }
+
         /// <summary>“COA - 批号 - 包数 包 - 净重kg”，数字格式与原 VBA 的字符串拼接一致。</summary>
         public static string FileName(string batch, double packageCount, double netWeight)
             => $"COA - {batch} - {Vba.CStr(packageCount)} 包 - {Vba.CStr(netWeight)}kg";

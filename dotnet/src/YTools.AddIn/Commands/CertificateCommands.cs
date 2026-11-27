@@ -19,17 +19,18 @@ namespace YTools.AddIn.Commands
             using (var form = new CertificateForm(cfg))
             {
                 if (form.ShowDialog(Xl.Owner) != DialogResult.OK) return;
-                var (xlsx, pdf) = Create(cfg, form.Batch, form.MetalQuantity, form.PackageWeight, form.Ledger);
+                var (xlsx, pdf) = Create(cfg, form.Batch, form.MetalQuantity, form.PackageWeight, form.Packages, form.Ledger);
                 if (Ui.Confirm("质量证书已生成并保存在：\nExcel 文件：" + xlsx + "\nPDF 文件：" + pdf + "\n\n是否打开 PDF？"))
                     Process.Start(pdf);
             }
         }, freezeScreen: false);
 
-        private static (string Xlsx, string Pdf) Create(AppConfig cfg, string batch, double metal, double pkgWeight, DataFile ledgerFile)
+        private static (string Xlsx, string Pdf) Create(AppConfig cfg, string batch, double metal, double pkgWeight, int packages, DataFile ledgerFile)
         {
             var cc = cfg.Certificate;
             var product = cc.FindProduct(batch) ?? throw new UserMessage("无法识别批号前缀：" + batch);
-            var (net, count, _) = CertificateMath.Compute(product, metal, pkgWeight);
+            var (net, _, _) = CertificateMath.Compute(product, metal, pkgWeight);
+            double count = packages; // 包数取整数（窗口里已确认）
             dynamic app = Xl.App;
 
             // 检测台账：已打开就直接用，否则只读打开（保持打开，连续开证书时更快）
